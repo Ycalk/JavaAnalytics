@@ -39,6 +39,9 @@ public class StudentsData {
                         .sum(),
                 topics.stream()
                         .mapToInt(topic -> topic.points().homework())
+                        .sum(),
+                topics.stream()
+                        .mapToInt(topic -> topic.points().seminar())
                         .sum());
     }
 
