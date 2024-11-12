@@ -1,4 +1,4 @@
-package models;
+package entities;
 
 public record Points(int activities, int exercises, int homework) {
     public int getPoints(){

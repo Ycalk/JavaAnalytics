@@ -1,4 +1,4 @@
-package models;
+package repos;
 
 public class Parser {
     public final String fileName;

@@ -1,4 +1,4 @@
-package models.externalData;
+package source;
 
 public class RegionRating {
     public double getRating(String regionName){
