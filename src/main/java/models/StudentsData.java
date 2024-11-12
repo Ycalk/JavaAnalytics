@@ -14,8 +14,9 @@ public class StudentsData {
         this.courseName = courseName;
     }
 
-    public void createStudent(String name, String group, Points points){
-        var student = new Student(name, group, new Region(name), points);
+    public void createStudent(String name, String group, List<Topic> coveredTopics){
+        var student = new Student(name, group, new Region(name),
+                getPoints(coveredTopics), coveredTopics);
         if (!groups.containsKey(group)){
             var newGroup = new ArrayList<Student>();
             newGroup.add(student);
@@ -23,6 +24,19 @@ public class StudentsData {
         } else {
             groups.get(group).add(student);
         }
+    }
+
+    private Points getPoints(List<Topic> topics){
+        return new Points(
+                topics.stream()
+                        .mapToInt(topic -> topic.points().activities())
+                        .sum(),
+                topics.stream()
+                        .mapToInt(topic -> topic.points().exercises())
+                        .sum(),
+                topics.stream()
+                        .mapToInt(topic -> topic.points().homework())
+                        .sum());
     }
 
     public List<Student> getStudents(String group){
