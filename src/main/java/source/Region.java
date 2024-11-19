@@ -1,4 +1,4 @@
-package models.externalData;
+package source;
 
 public class Region {
     public final double rating;

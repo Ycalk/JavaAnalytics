@@ -1,5 +1,5 @@
-package models;
-import models.externalData.Region;
+package entities;
+import source.Region;
 
 import java.util.List;
 

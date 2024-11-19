@@ -1,6 +1,9 @@
-package models;
+package repos;
 
-import models.externalData.Region;
+import entities.Points;
+import entities.Student;
+import entities.Topic;
+import source.Region;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,6 +39,9 @@ public class StudentsData {
                         .sum(),
                 topics.stream()
                         .mapToInt(topic -> topic.points().homework())
+                        .sum(),
+                topics.stream()
+                        .mapToInt(topic -> topic.points().seminar())
                         .sum());
     }
 
