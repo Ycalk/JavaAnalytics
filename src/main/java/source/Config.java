@@ -17,6 +17,8 @@ public class Config {
     private static String CLIENT_SECRET;
     private static String REDIRECT_URI;
     private static String CODE;
+    private static String TOKEN;
+    private static int USER_ID;
 
     public static int getAppId(){
         return APP_ID;
@@ -34,6 +36,14 @@ public class Config {
         return CODE;
     }
 
+    public static String getToken(){
+        return TOKEN;
+    }
+
+    public static int getUserId(){
+        return USER_ID;
+    }
+
     public static void init(){
         if (instance == null){
             instance = new Config();
@@ -47,6 +57,8 @@ public class Config {
         CLIENT_SECRET = config.getString("CLIENT_SECRET");
         REDIRECT_URI = config.getString("REDIRECT_URI");
         CODE = config.getString("CODE");
+        TOKEN = config.getString("TOKEN");
+        USER_ID = config.getInt("USER_ID");
     }
 
     private String getFileString(){

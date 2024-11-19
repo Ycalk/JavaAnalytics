@@ -6,8 +6,10 @@ public class Region {
     public final String name;
 
     public Region(String studentName){
-        var region = vkApi.getRegion(studentName);
-        rating = new RegionRating().getRating(region);
-        name = region;
+        name = vkApi.getCity(studentName);
+        if (name != null){
+            System.out.printf("Город: %s; Имя: %s\n", name, studentName);
+        }
+        rating = new RegionRating().getRating(name);
     }
 }
