@@ -11,7 +11,7 @@ import java.util.Objects;
 
 public class Config {
     private static final String FILE_NAME = "config.json";
-    private static Config instance;
+    private static final Config instance;
 
     private final int APP_ID;
     private final String CLIENT_SECRET;

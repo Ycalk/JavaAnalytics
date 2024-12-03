@@ -22,9 +22,8 @@ public class StudentsData {
 
     public void createStudent(String name, String group, List<Topic> coveredTopics){
         var userInfo = vkApi.getUserInfo(name);
-        var student = new Student(name, group, Region.getRegion(userInfo.city),
+        var student = new Student(name, group, Region.getRegion(userInfo.city), userInfo.city,
                 getPoints(coveredTopics), coveredTopics, userInfo.bDate);
-        System.out.println(student);
         if (!groups.containsKey(group)){
             var newGroup = new ArrayList<Student>();
             newGroup.add(student);
