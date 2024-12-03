@@ -13,45 +13,43 @@ public class Config {
     private static final String FILE_NAME = "config.json";
     private static Config instance;
 
-    private static int APP_ID;
-    private static String CLIENT_SECRET;
-    private static String REDIRECT_URI;
-    private static String CODE;
-    private static String TOKEN;
-    private static int USER_ID;
+    private final int APP_ID;
+    private final String CLIENT_SECRET;
+    private final String REDIRECT_URI;
+    private final String CODE;
+    private final String TOKEN;
+    private final int USER_ID;
 
     public static int getAppId(){
-        return APP_ID;
+        return instance.APP_ID;
     }
 
     public static String getClientSecret(){
-        return CLIENT_SECRET;
+        return instance.CLIENT_SECRET;
     }
 
     public static String getRedirectUri(){
-        return REDIRECT_URI;
+        return instance.REDIRECT_URI;
     }
 
     public static String getCode(){
-        return CODE;
+        return instance.CODE;
     }
 
     public static String getToken(){
-        return TOKEN;
+        return instance.TOKEN;
     }
 
     public static int getUserId(){
-        return USER_ID;
+        return instance.USER_ID;
     }
 
-    public static void init(){
-        if (instance == null){
-            instance = new Config();
-        }
+    static {
+        instance = new Config();
     }
 
     private Config(){
-        String fileString = getFileString();
+        var fileString = getFileString();
         var config = new JSONObject(fileString);
         APP_ID = config.getInt("APP_ID");
         CLIENT_SECRET = config.getString("CLIENT_SECRET");

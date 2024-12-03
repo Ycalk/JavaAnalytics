@@ -25,6 +25,7 @@ public class VkApi {
                         .execute();
                 userId = authResponse.getUserId();
                 token = authResponse.getAccessToken();
+                System.out.println(token);
             } else {
                 userId = Config.getUserId();
                 token = Config.getToken();
@@ -36,30 +37,26 @@ public class VkApi {
         }
     }
 
-    public String getCity(String studentName){
+    public UserInfo getUserInfo(String studentName){
         SearchResponse response;
         try {
-            response = new Users(vk).search(actor).q(studentName).fields(Fields.CITY, Fields.HOME_TOWN).execute();
+            response = new Users(vk).search(actor).q(studentName).fields(Fields.CITY,
+                    Fields.HOME_TOWN, Fields.BDATE).execute();
         } catch (ApiException | ClientException e) {
             throw new RuntimeException(e);
         }
 
         var items = response.getItems();
         if (items.isEmpty()){
-            return null;
+            return UserInfo.empty();
         }
         var user = items.getFirst();
-
+        var bdate = user.getBdate();
         var hometown = user.getHomeTown();
         if (hometown != null && !hometown.isEmpty()){
-            return hometown;
+            return new UserInfo(hometown, bdate);
         }
-
-        var city = user.getCity();
-        if (city != null && !city.getTitle().isEmpty()){
-            return city.getTitle();
-        }
-
-        return null;
+        var city = user.getCity() == null ? null : user.getCity().getTitle();
+        return new UserInfo(city, bdate);
     }
 }

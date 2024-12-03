@@ -8,7 +8,6 @@ import java.nio.charset.StandardCharsets;
 
 public class Main {
     private static void init(){
-        Config.init();
         System.setOut(new PrintStream(
                 new FileOutputStream(FileDescriptor.out), true, StandardCharsets.UTF_8));
     }
