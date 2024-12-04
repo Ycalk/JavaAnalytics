@@ -18,6 +18,10 @@ dependencies {
     implementation("org.slf4j:slf4j-api:1.7.36")
 
     implementation(fileTree("lib") { include("*.jar") })
+
+    implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
+    implementation("org.postgresql:postgresql:42.5.4")
+    implementation("org.hibernate.orm:hibernate-core:6.2.7.Final")
 }
 
 tasks.test {
