@@ -3,13 +3,12 @@ package repos;
 import entities.Points;
 import entities.Student;
 import entities.Topic;
+import source.DataBase;
 import source.Region;
 import source.VkApi;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class StudentsData {
     public final String courseName;
@@ -31,6 +30,7 @@ public class StudentsData {
         } else {
             groups.get(group).add(student);
         }
+        DataBaseConnector.saveStudent(student);
     }
 
     private Points getPoints(List<Topic> topics){

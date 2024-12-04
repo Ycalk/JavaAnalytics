@@ -1,7 +1,6 @@
 package source;
 
 import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -14,13 +13,13 @@ import java.util.Objects;
 
 public class Region {
     public final Double rating;
-    public final String region;
+    public final String name;
 
     private static final Map<String, Region> regions = new HashMap<>();
 
-    private Region(String city){
-        region = RegionsData.getRegion(city);
-        rating = region == null ? null : RegionsData.getRating(region);
+    private Region(String name, Double rating){
+        this.name = name;
+        this.rating = rating;
     }
 
     public static Region getRegion(String city){
@@ -29,7 +28,17 @@ public class Region {
         }
 
         if (!regions.containsKey(city)){
-            regions.put(city, new Region(city));
+            var regionName = RegionsData.getRegion(city);
+            if (regionName == null){
+                return null;
+            }
+            var rating = RegionsData.getRating(regionName);
+            if (rating == null){
+                return null;
+            }
+            var newRegion = new Region(regionName, rating);
+            regions.put(city, newRegion);
+            return newRegion;
         }
         return regions.get(city);
     }
@@ -38,7 +47,7 @@ public class Region {
     public String toString() {
         return "Region{" +
                 "rating=" + rating +
-                ", region='" + region + '\'' +
+                ", region='" + name + '\'' +
                 '}';
     }
 }

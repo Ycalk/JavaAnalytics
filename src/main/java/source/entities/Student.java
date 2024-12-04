@@ -13,10 +13,10 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "student_name")
     private String name;
 
-    @Column(name = "group", nullable = false)
+    @Column(name = "student_group")
     private String group;
 
     @Column(name = "city")
@@ -27,7 +27,7 @@ public class Student {
     private Date bDate;
 
     @ManyToOne
-    @JoinColumn(name = "region", referencedColumnName = "name")
+    @JoinColumn(name = "region", referencedColumnName = "region_name")
     private Region region;
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

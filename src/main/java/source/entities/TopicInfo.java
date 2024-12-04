@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class TopicInfo {
 
     @Id
-    @Column(name = "name", nullable = false)
+    @Column(name = "t_name", nullable = false)
     private String name;
 
     @Column(name = "activities_max", nullable = false)

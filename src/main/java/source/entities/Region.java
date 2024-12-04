@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Region {
 
     @Id
-    @Column(name = "name", nullable = false)
+    @Column(name = "region_name", nullable = false)
     private String name;
 
     @Column(name = "rating", nullable = false)

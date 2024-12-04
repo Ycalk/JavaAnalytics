@@ -14,7 +14,7 @@ public class StudentScore {
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "topic_name", referencedColumnName = "name", nullable = false)
+    @JoinColumn(name = "topic_name", referencedColumnName = "t_name", nullable = false)
     private TopicInfo topic;
 
     @Column(name = "activities", nullable = false)
