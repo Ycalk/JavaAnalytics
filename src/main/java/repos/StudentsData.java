@@ -33,6 +33,24 @@ public class StudentsData {
         DataBaseConnector.saveStudent(student);
     }
 
+    public static StudentsData fromDataBase(String courseName){
+        var result = new StudentsData(courseName);
+        var students = DataBaseConnector.getStudents();
+        for (var student : students){
+            if (student.region() == null && student.bDate() == null && student.city() == null){
+                continue;
+            }
+            if (!result.groups.containsKey(student.group())){
+                var newGroup = new ArrayList<Student>();
+                newGroup.add(student);
+                result.groups.put(student.group(), newGroup);
+            } else {
+                result.groups.get(student.group()).add(student);
+            }
+        }
+        return result;
+    }
+
     private Points getPoints(List<Topic> topics){
         return new Points(
                 topics.stream()

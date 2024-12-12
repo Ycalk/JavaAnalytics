@@ -1,7 +1,6 @@
 import repos.Parser;
-import source.Config;
+import repos.StudentsData;
 
-import jakarta.persistence.Persistence;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
@@ -14,10 +13,6 @@ public class Main {
     }
 
     public static void main(String[] args){
-        init();
-
-        var parser = new Parser("basicProgramming.csv", "Basic Programming");
-        parser.parseData();
-        var data = parser.getData();
+        var data = StudentsData.fromDataBase("Basic Programming");
     }
 }
