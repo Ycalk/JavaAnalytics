@@ -51,6 +51,7 @@ public class Parser {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+            System.out.printf("Parsed %d/%d students. Left: %d\n", i - 2, data.size(), data.size() - i);
         }
     }
 
