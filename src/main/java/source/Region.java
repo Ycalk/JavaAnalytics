@@ -43,6 +43,13 @@ public class Region {
         return regions.get(city);
     }
 
+    public static Region fromSource(source.entities.Region region){
+        if (region == null){
+            return null;
+        }
+        return new Region(region.getName(), (double) region.getRating());
+    }
+
     @Override
     public String toString() {
         return "Region{" +
