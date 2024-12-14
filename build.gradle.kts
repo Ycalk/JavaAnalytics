@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    id("org.openjfx.javafxplugin") version "0.0.8"
 }
 
 group = "org.example"
@@ -22,8 +23,18 @@ dependencies {
     implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
     implementation("org.postgresql:postgresql:42.5.4")
     implementation("org.hibernate.orm:hibernate-core:6.2.7.Final")
+
+    implementation("org.openjfx:javafx-base:20")
+    implementation("org.openjfx:javafx-controls:20")
+    implementation("org.openjfx:javafx-graphics:20")
+    implementation("org.openjfx:javafx-fxml:20")
 }
+
 
 tasks.test {
     useJUnitPlatform()
+}
+
+javafx {
+    modules("javafx.controls", "javafx.fxml")
 }

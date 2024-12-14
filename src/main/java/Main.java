@@ -1,6 +1,4 @@
 import repos.Parser;
-import repos.StudentsData;
-
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
@@ -13,6 +11,6 @@ public class Main {
     }
 
     public static void main(String[] args){
-        var data = StudentsData.fromDataBase("Basic Programming");
+        AppFX.main(args);
     }
 }
