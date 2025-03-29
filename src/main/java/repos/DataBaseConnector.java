@@ -1,5 +1,6 @@
 package repos;
 
+import entities.Points;
 import entities.Topic;
 import source.DataBase;
 import source.entities.StudentScore;
@@ -31,6 +32,42 @@ public class DataBaseConnector {
         region.setName(student.region().name);
         region.setRating(student.region().rating.floatValue());
         return region;
+    }
+
+    public static List<entities.Student> getStudents(){
+        var students = dataBase.getStudents();
+        var result = new ArrayList<entities.Student>();
+        for (var s : students){
+            var coveredTopics = getCoveredTopics(s.getScores());
+            var totalPoints = new Points(
+                    coveredTopics.stream().mapToInt(t -> t.points().activities()).sum(),
+                    coveredTopics.stream().mapToInt(t -> t.points().exercises()).sum(),
+                    coveredTopics.stream().mapToInt(t -> t.points().homework()).sum(),
+                    coveredTopics.stream().mapToInt(t -> t.points().seminar()).sum()
+            );
+            var bDate = s.getBDate() == null ? null : formatter.format(s.getBDate());
+            var student = new entities.Student(s.getName(), s.getGroup(),
+                    source.Region.fromSource(s.getRegion()), s.getCity(),
+                    totalPoints, coveredTopics, bDate);
+            result.add(student);
+        }
+
+
+        return result;
+    }
+
+    private static List<Topic> getCoveredTopics(List<source.entities.StudentScore> scores){
+        var result = new ArrayList<Topic>();
+        for (var s : scores){
+            var topicInfo = s.getTopic();
+            var topic = new Topic(
+                    topicInfo.getName(),
+                    new Points(s.getActivities(), s.getExercises(), s.getHomework(), s.getSeminar()),
+                    new Points(topicInfo.getActivitiesMax(), topicInfo.getExercisesMax(), topicInfo.getHomeworkMax(), topicInfo.getSeminarMax())
+            );
+            result.add(topic);
+        }
+        return result;
     }
 
     private static List<TopicInfo> getTopics(List<Topic> topics){

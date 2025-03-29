@@ -42,4 +42,10 @@ public class DataBase {
             entityManager.close();
         }
     }
+
+    public List<source.entities.Student> getStudents(){
+        var entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
+        var query = entityManager.createQuery("SELECT s FROM Student s", source.entities.Student.class);
+        return query.getResultList();
+    }
 }
